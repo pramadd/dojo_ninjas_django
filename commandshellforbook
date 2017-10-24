@@ -1,0 +1,117 @@
+>>> from apps.book_authors.models import *
+>>> Book.objects.create(name="c sharp ", desc="Everything about c")
+Book object: c sharp  Everything about c 
+>>> Book.objects.create(name="Java ", desc="Everything about Java")
+Book object: Java  Everything about Java 
+>>> Book.objects.create(name="Python ", desc="Everything about Python")
+Book object: Python  Everything about Python 
+~~~~~~~
+Book.objects.all()
+<QuerySet [Book object: c sharp  Everything about c , Book object: Java  Everything about Java , Book object: Python  Everything about Python ]>
+>>> Book.objects.create(name="PHP ", desc="Everything about PHP")
+Book object: PHP  Everything about PHP 
+>>> Book.objects.create(name="Ruby", desc="Everything about Ruby")
+Book object: Ruby Everything about Ruby 
+>>> Book.objects.all()
+<QuerySet [Book object: c sharp  Everything about c , Book object: Java  Everything about Java , Book object: Python  Everything about Python , Book object: PHP  Everything about PHP , Book object: Ruby Everything about Ruby ]>
+>>> Book.objects.create(first_name="mike", last_name="p",email="mike@gmail.com")
+~~~~
+Author.objects.create(first_name="mike", last_name="p",email="mike@gmail.com")
+Author object: mike p mike@gmail.com 
+>>> Author.objects.create(first_name="Speros", last_name="m",email="Speros@gmail.com")
+Author object: Speros m Speros@gmail.com 
+>>> Author.objects.create(first_name="John", last_name="h",email="John@gmail.com")
+Author object: John h John@gmail.com 
+>>> Author.objects.create(first_name="Jadee", last_name="d",email="Jadee@gmail.com")
+Author object: Jadee d Jadee@gmail.com 
+>>> Author.objects.all()
+<QuerySet [Author object: mike p mike@gmail.com , Author object: Speros m Speros@gmail.com , Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com ]>
+>>> Author.objects.create(first_name="Jay", last_name="s",email="Jay@gmail.com")
+Author object: Jay s Jay@gmail.com 
+>>> Author.objects.all()
+<QuerySet [Author object: mike p mike@gmail.com , Author object: Speros m Speros@gmail.com , Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com , Author object: Jay s Jay@gmail.com ]>
+>>> ^D
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+Migrations for 'book_authors':
+  apps/book_authors/migrations/0002_author_notes.py:
+    - Add field notes to author
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, book_authors, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying book_authors.0002_author_notes... OK
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py shell
+Python 2.7.10 (default, Feb  7 2017, 00:08:15) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.book_authors.models import *
+>>> Book.objects.all()
+<QuerySet [Book object: c sharp  Everything about c , Book object: Java  Everything about Java , Book object: Python  Everything about Python , Book object: PHP  Everything about PHP , Book object: Ruby Everything about Ruby ]>
+>>> Book.objects.last()
+Book object: Ruby Everything about Ruby 
+~~~~~~~~~~`
+c=Book.objects.last()
+>>> c.name="c#"
+>>> c.save()
+>>> Book.objects.all()
+<QuerySet [Book object: c sharp  Everything about c , Book object: Java  Everything about Java , Book object: Python  Everything about Python , Book object: PHP  Everything about PHP , Book object: c# Everything about Ruby ]>
+>>> b=Author.objects.last()
+>>> b.first_name =" Ketul"
+>>> b.save()
+>>> Author.objects.all()
+<QuerySet [Author object: mike p mike@gmail.com , Author object: Speros m Speros@gmail.com , Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com , Author object:  Ketul s Jay@gmail.com ]>
+>>> book1=Book.objects.get(id=1)
+>>> book2=Book.objects.get(id=2)
+>>> book3=Book.objects.get(id=3)
+>>> book4=Book.objects.get(id=4)
+>>> book5=Book.objects.get(id=5)
+>>> author1=Author.objects.all(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'id'
+>>> author1=Author.objects.get(id=1)
+>>> author2=Author.objects.get(id=2)
+>>> author3=Author.objects.get(id=3)
+>>> author4=Author.objects.get(id=4)
+>>> author5=Author.objects.get(id=5)
+>>> author1.books.add(book1)
+>>> author1.books.add(book2)
+>>> author2.books.add(book1)
+>>> author2.books.add(book2)
+>>> author2.books.add(book3)
+>>> author3.books.add(book1)
+>>> author3.books.add(book2)
+>>> author3.books.add(book3)
+>>> author3.books.add(book4)
+>>> author4.books.add(book1)
+>>> author4.books.add(book2)
+>>> author4.books.add(book3)
+>>> author4.books.add(book4)
+>>> author4.books.add(book5)
+>>> 
+~~~~~~~~~~~
+author4.books.add(book1,book2,book3,book4,book5)
+~~~~~~~~`
+book3.authors.all()
+<QuerySet [Author object: Speros m Speros@gmail.com , Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com ]>
+~~~~~~~~`
+book3.authors.first().delete()
+(4, {u'book_authors.Author': 1, u'book_authors.Author_books': 3})
+>>> book3.authors.all()
+<QuerySet [Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com ]>
+~~~~~~~~~~`
+>>> book2.authors.add(author5)
+>>> book2.authors.all()
+<QuerySet [Author object: mike p mike@gmail.com , Author object: John h John@gmail.com , Author object: Jadee d Jadee@gmail.com , Author object:  Ketul s Jay@gmail.com ]>
+>>> 
+~~~~~~~
+
+>>> author5.books.all()
+<QuerySet [Book object: Java  Everything about Java ]>
+>>> author3.books.all()
+<QuerySet [Book object: c sharp  Everything about c , Book object: Java  Everything about Java , Book object: Python  Everything about Python , Book object: PHP  Everything about PHP ]>
+>>> author2.books.all()
+<QuerySet []>
+~~~~~`
