@@ -1,0 +1,202 @@
+(djangoEnv) Rohans-MacBook-Pro:django_files rohan$ django-admin startproject dojoninjas
+(djangoEnv) Rohans-MacBook-Pro:django_files rohan$ cd dojoninjas
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ mkdir apps
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ cd apps
+(djangoEnv) Rohans-MacBook-Pro:apps rohan$ touch __init__.py
+(djangoEnv) Rohans-MacBook-Pro:apps rohan$ python ../manage.py startapp dojo_ninjas
+(djangoEnv) Rohans-MacBook-Pro:apps rohan$ ls
+__init__.py	dojo_ninjas
+(djangoEnv) Rohans-MacBook-Pro:apps rohan$ cd dojo_ninjas
+(djangoEnv) Rohans-MacBook-Pro:dojo_ninjas rohan$ touch urls.py
+(djangoEnv) Rohans-MacBook-Pro:dojo_ninjas rohan$ python manage.py shell
+python: can't open file 'manage.py': [Errno 2] No such file or directory
+(djangoEnv) Rohans-MacBook-Pro:dojo_ninjas rohan$ cd ..
+(djangoEnv) Rohans-MacBook-Pro:apps rohan$ cd ..
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ ls
+apps		dojoninjas	manage.py
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py shell
+Python 2.7.10 (default, Feb  7 2017, 00:08:15) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.dojo_ninjas.models import *
+---------
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+Migrations for 'dojo_ninjas':
+  apps/dojo_ninjas/migrations/0001_initial.py:
+    - Create model Dojo
+    - Create model Ninja
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying dojo_ninjas.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py shell
+Python 2.7.10 (default, Feb  7 2017, 00:08:15) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> python manage.py shell
+-----
+>>> from apps.dojo_ninjas.models import *
+>>> b = Dojo(name="CodingDojo Silicon Valley", city = "Mountain View", state= "CA")
+>>> b.save()
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>]>
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>]>
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>]>
+>>> ^D
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+No changes detected
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  No migrations to apply.
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py shell
+Python 2.7.10 (default, Feb  7 2017, 00:08:15) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.dojo_ninjas.models import *
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>]>
+>>> ^D
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+No changes detected
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  No migrations to apply.
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+No changes detected
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  No migrations to apply.
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py shell
+Python 2.7.10 (default, Feb  7 2017, 00:08:15) 
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.dojo_ninjas.models import *
+>>> Dojo.objects.all()
+<QuerySet [<Dojo: Dojo object>]>
+>>> 
+>>> b = Dojo.objects.all()
+>>> repr(b)
+'<QuerySet [<Dojo: Dojo object>]>'
+>>> Dojo.objects.all()
+------
+<QuerySet [Dojo object: CodingDojo Silicon Valley Mountain View CA ]>
+>>> c= Dojo(name="CodingDojo Seattle", city = "Seattle", state= "WA")
+>>> c.save()
+>>> d= Dojo(name="CodingDojo New York", city = "New York", state= "NY")
+>>> d.save()
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: CodingDojo Silicon Valley Mountain View CA , Dojo object: CodingDojo Seattle Seattle WA , Dojo object: CodingDojo New York New York NY ]>
+>>> d= Dojo(name="CodingDojo New York", city = "New York", state= "NY")
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: CodingDojo Silicon Valley Mountain View CA , Dojo object: CodingDojo Seattle Seattle WA , Dojo object: CodingDojo New York New York NY ]>
+-----
+
+>>> Ninja.objects.create(first_name="neethu",last_name="reddy", dojo = Dojo.objects.first())
+ninja object: neethu reddy 
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: CodingDojo Silicon Valley Mountain View CA , Dojo object: CodingDojo Seattle Seattle WA , Dojo object: CodingDojo New York New York NY ]>
+>>> Ninja.objects.create(first_name="maddi",last_name="reddy", dojo = Dojo.objects.first())
+ninja object: maddi reddy 
+>>> Ninja.objects.create(first_name="chintu",last_name="reddy", dojo = Dojo.objects.get(id="2"))
+ninja object: chintu reddy 
+>>> Ninja.objects.create(first_name="chintu",last_name="reddy", dojo = Dojo.objects.get(id="3"))
+ninja object: chintu reddy 
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: CodingDojo Silicon Valley Mountain View CA , Dojo object: CodingDojo Seattle Seattle WA , Dojo object: CodingDojo New York New York NY ]>
+>>> Ninja.objects.all()
+<QuerySet [ninja object: neethu reddy , ninja object: maddi reddy , ninja object: chintu reddy , ninja object: chintu reddy ]>
+>>> Dojo.objects.first().ninjas.all()
+<QuerySet [ninja object: neethu reddy , ninja object: maddi reddy ]>
+>>> Ninja.objects.first().dojo
+Dojo object: CodingDojo Silicon Valley Mountain View CA 
+>>> Dojo.objects.get(id=1).delete()
+(3, {u'dojo_ninjas.Ninja': 2, u'dojo_ninjas.Dojo': 1})
+>>> 
+>>> Dojo.objects.get(id=2).delete()
+(2, {u'dojo_ninjas.Ninja': 1, u'dojo_ninjas.Dojo': 1})
+>>> Dojo.objects.get(id=3).delete()
+(2, {u'dojo_ninjas.Ninja': 1, u'dojo_ninjas.Dojo': 1})
+>>> Dojo.objects.create(name="coding dojo dc", city="dc",state="Maryland")
+Dojo object: coding dojo dc dc Maryland 
+>>> Dojo.objects.create(name="coding dojo tampa", city="tampa",state="fl")
+Dojo object: coding dojo tampa tampa fl 
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: coding dojo dc dc Maryland , Dojo object: coding dojo tampa tampa fl ]>
+>>> Dojo.objects.create(name="coding dojo sanjose", city="san jose",state="ca")
+Dojo object: coding dojo sanjose san jose ca 
+>>> Dojo.objects.all()
+<QuerySet [Dojo object: coding dojo dc dc Maryland , Dojo object: coding dojo tampa tampa fl , Dojo object: coding dojo sanjose san jose ca ]>
+-----------
+>>> Ninja.objects.all()
+<QuerySet [ninja object: neethu reddy , ninja object: maddi reddy , ninja object: chintu reddy ]>
+>>> b = Ninja.objects.create(first_name="aa",last_name="bb", dojo = Dojo.objects.first())
+>>> b.save()
+>>> b.first_name
+'aa'
+>>> Ninja.objects.all()
+<QuerySet [ninja object: neethu reddy , ninja object: maddi reddy , ninja object: chintu reddy , ninja object: aa bb ]>
+>>> c=Ninja.objects.create(first_name="bb",last_name="bb", dojo = Dojo.objects.first())
+>>> c.save()
+>>> Ninja.objects.create(first_name="aa",last_name="bb", dojo = Dojo.objects.first())
+ninja object: aa bb 
+>>> Ninja.objects.all()
+<QuerySet [ninja object: neethu reddy , ninja object: maddi reddy , ninja object: chintu reddy , ninja object: aa bb , ninja object: bb bb , ninja object: aa bb ]>
+
+---------
+Dojo.objects.get(id=5)
+Dojo object: coding dojo tampa tampa fl 
+>>> Ninja.objects.create(first_name="hggk",last_name="jguk", dojo = Dojo.objects.get(id="5"))
+ninja object: hggk jguk 
+>>> Ninja.objects.create(first_name="vvrww",last_name="vbb", dojo = Dojo.objects.get(id="5"))
+ninja object: vvrww vbb 
+>>> Ninja.objects.create(first_name="vjgyqgd",last_name="jgewu", dojo = Dojo.objects.get(id="5"))
+ninja object: vjgyqgd jgewu 
+>>> Ninja.objects.create(first_name="udy",last_name="yd", dojo = Dojo.objects.get(id="6"))
+ninja object: udy yd 
+>>> Ninja.objects.create(first_name="kfhweio",last_name="udw", dojo = Dojo.objects.get(id="6"))
+ninja object: kfhweio udw 
+>>> Ninja.objects.create(first_name="duwl",last_name="dkjhc", dojo = Dojo.objects.get(id="6"))
+ninja object: duwl dkjhc 
+----------
+>>> Dojo.objects.first().ninjas.all()
+<QuerySet [ninja object: aa bb , ninja object: bb bb , ninja object: aa bb ]>
+>>> Dojo.objects.last().ninjas.all()
+<QuerySet [ninja object: udy yd , ninja object: kfhweio udw , ninja object: duwl dkjhc ]>
+>>> ^D
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py makemigrations
+Migrations for 'dojo_ninjas':
+  apps/dojo_ninjas/migrations/0002_dojo_desc.py:
+    - Add field desc to dojo
+(djangoEnv) Rohans-MacBook-Pro:dojoninjas rohan$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying dojo_ninjas.0002_dojo_desc... OK
